@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rishuu's Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif,sans-serif;
+      background: #dee9fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 400px;
+      background: rgb(242, 243, 241);
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .messages {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .bot { color: blue; margin: 5px 0; }
+    .user { color: green; margin: 5px 0; text-align: right; }
+    input {
+      width: 80%;
+      padding: 8px;
+    }
+    button {
+      padding: 8px 12px;
+      background: rgb(225, 57, 222);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: rgb(34, 219, 99);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>🤖 Rishuu's Rule-Based Chatbot</h2>
+    <div class="messages" id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Heyy buddy.. Say something..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function getBotResponse(input) {
+      input = input.toLowerCase();
+
+      if (input.includes("hello") || input.includes("hi")) {
+        return "Hello! How can I help you?";
+      } 
+      if (input.includes("who are you?")) {
+        return "I'm Rishu's chatbot, here to asssist you!";
+      } 
+      else if (input.includes("time")) {
+        return "The current time is " + new Date().toLocaleTimeString();
+      } 
+      if (input.includes("bye")) {
+        return " Goodbye! Have a great day!";
+      } 
+      else {
+        return "Sorry, I didn’t understand that.";
+      }
+    }
+
+    function sendMessage() {
+      let userInput = document.getElementById("userInput").value;
+      if (userInput.trim() === "") return;
+
+      let chatbox = document.getElementById("chatbox");
+
+      let userDiv = document.createElement("div");
+      userDiv.className = "user";
+      userDiv.innerText = "You: " + userInput;
+      chatbox.appendChild(userDiv);
+
+      let botDiv = document.createElement("div");
+      botDiv.className = "bot";
+      botDiv.innerText = "Rishu's Bot:" + getBotResponse(userInput);
+      chatbox.appendChild(botDiv);
+
+      chatbox.scrollTop = chatbox.scrollHeight;
+
+      document.getElementById("userInput").value = "";
+    }
+  </script>
+</body>
+</html>
